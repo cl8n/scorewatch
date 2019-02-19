@@ -47,7 +47,7 @@ for (let mode of MODES) {
         if (score[7] !== 'SS' && score[7] !== 'Silver SS')
             scoreInfo += ` (${score[8]}, ${score[9]})`;
 
-        scoreInfo += `  \n${dateFormat(config.date, 'd mmmm yyyy')}, ${helpers.getMapStatus(score[3])}`;
+        scoreInfo += `  \n${dateFormat(score[6], 'd mmmm yyyy', true)}, ${helpers.getMapStatus(score[3])}`;
 
         if (score[10] !== '0')
             scoreInfo += `, ${score[10]}pp`;
