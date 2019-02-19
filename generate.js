@@ -46,6 +46,8 @@ for (let mode of MODES) {
 
         if (score[7] !== 'SS' && score[7] !== 'Silver SS')
             scoreInfo += ` (${score[8]}, ${score[9]})`;
+        else if (score[2] === 'osu!mania')
+            scoreInfo += ` (${score[8]})`;
 
         scoreInfo += `  \n${dateFormat(score[6], 'd mmmm yyyy', true)}, ${helpers.getMapStatus(score[3])}`;
 
