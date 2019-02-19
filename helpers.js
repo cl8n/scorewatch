@@ -59,6 +59,12 @@ function getMapData(mapId) {
     return mapData[mapId];
 }
 
+function getUserLink(userId, byName = false) {
+    const user = getUserData(userId, byName);
+
+    return `https://osu.ppy.sh/users/${user.user_id}`;
+}
+
 function getMapLink(mapId) {
     const map = getMapData(mapId);
     const mode = ['osu', 'taiko', 'fruits', 'mania'][map.mode];
@@ -121,7 +127,7 @@ exports.osuModernLinks = function (text) {
     return text
         .replace(/https\:\/\/osu.ppy.sh\/s\//g, 'https://osu.ppy.sh/beatmapsets/')
         .replace(/https\:\/\/osu.ppy.sh\/u\/([0-9]+)/g, 'https://osu.ppy.sh/users/$1')
-//        .replace(/https\:\/\/osu.ppy.sh\/u\/([0-9A-Za-z-_%\[\]]+)/g, (match, p1) => getUserLink(p1))
+        .replace(/https\:\/\/osu.ppy.sh\/u\/([0-9A-Za-z-_%\[\]]+)/g, (_, userId) => getUserLink(userId, true))
         .replace(/https\:\/\/osu.ppy.sh\/b\/([0-9]+)/g, (_, mapId) => getMapLink(mapId))
         .replace(/https\:\/\/osu.ppy.sh\/forum\/t\//g, 'https://osu.ppy.sh/community/forums/topics/');
 }
@@ -154,7 +160,7 @@ exports.textFromTemplate = function (template, vars = {}) {
 exports.getUserMd = function (userId, byName = false) {
     const user = getUserData(userId, byName);
 
-    return `[${escapeMarkdown(user.username)}](https://osu.ppy.sh/users/${user.user_id})`;
+    return `[${escapeMarkdown(user.username)}](${getUserLink(user.user_id)})`;
 }
 
 exports.getMapMd = function (mapId) {
