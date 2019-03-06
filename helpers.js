@@ -109,6 +109,8 @@ exports.fullModeName = function (mode) {
 
 exports.fixCommonMistakes = function (text) {
     return text
+        // newlines
+        .replace(/\\n/g, '\n')
         // "smart" characters
         .replace(/[‘’]/g, "'")
         .replace(/[“”]/g, '"')
