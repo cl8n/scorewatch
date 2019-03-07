@@ -56,17 +56,20 @@ for (let mode of MODES) {
 
         scoreInfo += '  \n*';
 
-        if (score[12] === score[13])
-            scoreInfo += `Added and written by ${helpers.getUserMd(score[12], true)}`;
+        if (score[15] === 'No description')
+            scoreInfo += `Added by ${helpers.getUserMd(score[12], true)}`;
         else
-            scoreInfo += `Added by ${helpers.getUserMd(score[12], true)}, written by ${helpers.getUserMd(score[13], true)}`;
+            if (score[12] === score[13])
+                scoreInfo += `Added and written by ${helpers.getUserMd(score[12], true)}`;
+            else
+                scoreInfo += `Added by ${helpers.getUserMd(score[12], true)}, written by ${helpers.getUserMd(score[13], true)}`;
 
         scoreInfo += '*';
 
         scores.push(helpers.textFromTemplate(newsPostTemplateScore, {
             VIDEO: score[5],
             SCORE_INFO: scoreInfo,
-            DESCRIPTION: helpers.fixCommonMistakes(helpers.osuModernLinks(score[14]))
+            DESCRIPTION: score[15] === 'No description' ? null : helpers.fixCommonMistakes(helpers.osuModernLinks(score[15]))
         }));
     }
 
